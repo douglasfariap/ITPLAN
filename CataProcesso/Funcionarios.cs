@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CataProcesso {
     class Funcionarios {
         public int matricula;
-        public String[] nomefp = new string[16];
+        public String[] nomefp = new string[18];
         public String[] nomehl = new string[20];
         public String[] nomecp = new string[18];
 
@@ -28,7 +25,9 @@ namespace CataProcesso {
             nomefp[13] = "FP-" + BuscaCodPosto(matricula) + "-" + "12-2018-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomefp[14] = "FP-" + BuscaCodPosto(matricula) + "-" + "01-2019-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomefp[15] = "FP-" + BuscaCodPosto(matricula) + "-" + "02-2019-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
-            
+            nomefp[16] = "FP-" + BuscaCodPosto(matricula) + "-" + "03-2019-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
+            nomefp[17] = "FP-" + BuscaCodPosto(matricula) + "-" + "04-2019-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
+
             nomehl[0] = "HL-" + BuscaCodPosto(matricula) + "-" + "11-2017-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomehl[1] = "HL-" + BuscaCodPosto(matricula) + "-" + "12-2017-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomehl[2] = "HL-" + BuscaCodPosto(matricula) + "-" + "13-2017-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
@@ -4984,7 +4983,7 @@ namespace CataProcesso {
         }
         public String BuscaAD(int matricula) {
             string nomead;
-            nomead = "ASO-DEMI-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
+            nomead = "ASO-DEM-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomead;
         }
         public String BuscaFGTSItplan(int matricula) {
@@ -5001,8 +5000,20 @@ namespace CataProcesso {
             string nometr;
             nometr = "TRCT-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nometr;
-        }  
-       
-     
+        }
+        public String BuscaTRCTSemAssinatura(int matricula)
+        {
+            string nometr;
+            nometr = "TRCT-SEM-ASSINATURA-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
+            return nometr;
+        }
+
+        public String BuscaAVISO(int matricula)
+        {
+            string nomeaviso;
+            nomeaviso = "AVISO-PREVIO-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
+            return nomeaviso;
+        }
+
     }
 }
