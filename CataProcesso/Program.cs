@@ -108,9 +108,12 @@ namespace CataProcesso
                 File.Copy(sourceFile, destFile, true);
             }
 
+            //************************************COPIAR TELEGRAMAS************************************************
+            fun.BuscaTelegrama(fun.matricula);
+            string targetPath2 = targetPath + @"\telegramas";
+            string pastateleg = @"C:\temp\telegramas" + fun.matricula;
+            Directory.Move(pastateleg, targetPath2);
 
-
-            //Console.WriteLine(fun.nomehl[0]);
             //************************************COPIAR HLs************************************************
             String contrachequedir = targetPath + @"\CONTRA CHEQUE";
             Directory.CreateDirectory(contrachequedir);

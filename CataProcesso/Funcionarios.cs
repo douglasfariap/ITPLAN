@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Collections.Generic;
 
 
 namespace CataProcesso {
@@ -8,7 +10,8 @@ namespace CataProcesso {
         public String[] nomehl = new string[20];
         public String[] nomecp = new string[18];
 
-        public Funcionarios(int matricula) {
+        public Funcionarios(int matricula)
+        {
             nomefp[0] = "FP-" + BuscaCodPosto(matricula) + "-" + "11-2017-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomefp[1] = "FP-" + BuscaCodPosto(matricula) + "-" + "12-2017-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomefp[2] = "FP-" + BuscaCodPosto(matricula) + "-" + "01-2018-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
@@ -67,13 +70,15 @@ namespace CataProcesso {
             nomecp[15] = "CP-" + BuscaCodPosto(matricula) + "-" + "13-2018-p1-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomecp[16] = "CP-" + BuscaCodPosto(matricula) + "-" + "13-2018-p2-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             nomecp[17] = "CP-" + BuscaCodPosto(matricula) + "-" + "01-2019-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
-           // nomecp[18] = "CP-" + BuscaCodPosto(matricula) + "-" + "02-2019-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
-        }       
+            // nomecp[18] = "CP-" + BuscaCodPosto(matricula) + "-" + "02-2019-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
+        }
 
-        public String BuscaNomeFunc(int matricula) {
+        public String BuscaNomeFunc(int matricula)
+        {
             string codposto = "";
             string nomefunc = "";
-            switch (matricula) {
+            switch (matricula)
+            {
                 case 1000: nomefunc = "ABNER VASCONCELLOS DE LIRA"; codposto = "P056"; break;
                 case 1001: nomefunc = "ADAILTON DA SILVA ARAUJO"; codposto = "P035"; break;
                 case 1002: nomefunc = "ADAO JOSE FRANCA VAZ"; codposto = "P052"; break;
@@ -2518,10 +2523,12 @@ namespace CataProcesso {
 
             return nomefunc;
         }
-        public String BuscaCodPosto(int matricula) {
+        public String BuscaCodPosto(int matricula)
+        {
             string codposto = "";
             string nomefunc = "";
-            switch (matricula) {
+            switch (matricula)
+            {
                 case 1000: nomefunc = "ABNER VASCONCELLOS DE LIRA"; codposto = "P056"; break;
                 case 1001: nomefunc = "ADAILTON DA SILVA ARAUJO"; codposto = "P035"; break;
                 case 1002: nomefunc = "ADAO JOSE FRANCA VAZ"; codposto = "P052"; break;
@@ -4966,37 +4973,44 @@ namespace CataProcesso {
 
             return codposto;
         }
-        public String BuscaFR(int matricula) {
+        public String BuscaFR(int matricula)
+        {
             string nomefr;
             nomefr = "FR-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomefr;
         }
-        public String BuscaCT(int matricula) {
+        public String BuscaCT(int matricula)
+        {
             string nomect;
             nomect = "CT-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomect;
         }
-        public String BuscaAA(int matricula) {
+        public String BuscaAA(int matricula)
+        {
             string nomeaa;
             nomeaa = "ASO-ADM-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomeaa;
         }
-        public String BuscaAD(int matricula) {
+        public String BuscaAD(int matricula)
+        {
             string nomead;
             nomead = "ASO-DEM-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomead;
         }
-        public String BuscaFGTSItplan(int matricula) {
+        public String BuscaFGTSItplan(int matricula)
+        {
             string nomefg;
             nomefg = "FGTS-ITPLAN-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomefg;
         }
-        public String BuscaFGTSProbid(int matricula) {
+        public String BuscaFGTSProbid(int matricula)
+        {
             string nomefg;
             nomefg = "FGTS-PROBID-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomefg;
         }
-        public String BuscaTRCT(int matricula) {
+        public String BuscaTRCT(int matricula)
+        {
             string nometr;
             nometr = "TRCT-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nometr;
@@ -5013,6 +5027,29 @@ namespace CataProcesso {
             string nomeaviso;
             nomeaviso = "AVISO-PREVIO-" + BuscaCodPosto(matricula) + "-" + BuscaNomeFunc(matricula) + "-00" + matricula + ".pdf";
             return nomeaviso;
+        }
+        public void BuscaTelegrama(int matricula)
+        {
+            List<string> listFound = new List<string>();
+            string caminho = @"\\ad\Documentos Funcionarios\Telegramas";
+            string searchpattern = BuscaNomeFunc(matricula) + "*.pdf";
+            foreach (string d in Directory.GetDirectories(caminho))
+            {
+                foreach (string f in Directory.GetFiles(d, searchpattern))
+                {
+                    listFound.Add(f);
+                }
+            }
+            string pastateleg = @"C:\temp\telegramas" + matricula;
+            Directory.CreateDirectory(pastateleg);
+            foreach (string lf in listFound)
+            {
+                string chss = @"\";
+                char[] porra = chss.ToCharArray();
+                String[] nomearq = lf.Split(porra);
+                chss = nomearq[nomearq.Length - 1];
+                File.Copy(lf, Path.Combine(pastateleg,chss),true);
+            }
         }
 
     }
